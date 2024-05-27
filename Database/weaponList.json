@@ -1,0 +1,18 @@
+[
+    {"displayName": "Rusty Blade", "id": 1, "damage": 1},
+    {"displayName": "Ligma Spear", "id": 2, "damage": 2},
+    {"displayName": "Zematter Sword", "id":  3, "damage": 4},
+    {"displayName": "Sugon Axe", "id":  4, "damage": 5},
+    {"displayName": "Hitler Dagger", "id":  5, "damage": 7},
+    {"displayName": "Gatekeeper Karambit", "id":  6, "damage": 9},
+    {"displayName": "Goon Mace", "id":  7, "damage": 11},
+    {"displayName": "Edge Sword", "id":  8, "damage": 13},
+    {"displayName": "Fartnite Mace", "id":  9, "damage": 14},
+    {"displayName": "Google Club", "id":  10, "damage": 16},
+    {"displayName": "Jelk Dumbbell", "id":  11, "damage": 18},
+    {"displayName": "Shum Sword", "id":  12, "damage": 20},
+    {"displayName": "Cock Fist", "id":  13, "damage": 22},
+    {"displayName": "Dyslexic xae", "id":  14, "damage": 23},
+    {"displayName": "", "id":  15, "damage": 25}
+  
+  ]
