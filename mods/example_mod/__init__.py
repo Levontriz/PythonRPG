@@ -8,6 +8,7 @@ from mods.default_mod import Mod
 class CriticalHitSystem(Mod):
     def __init__(self):
         self.name = "CriticalHitSystem"
+        self.looping = False
         self.default_crit_chance = 0  # 15% chance for critical hit
         self.default_crit_multiplier = 2.0  # Double damage on crit
         self.new_item = Item("Test Item", "CriticalHitSystem:TestItem", "Test item for critical hit system!", False, None)
@@ -34,6 +35,12 @@ class CriticalHitSystem(Mod):
         character_system.edit_stat("crit_chance", self.default_crit_chance)
         character_system.edit_stat("crit_multiplier", self.default_crit_multiplier)
         character_system.inventory["main_hand"] = self.new_weapon
+    def show_test_screen(self, game):
+        self.looping = True
+        while self.looping:
+            game.screen_manager.get_screen_by_identifier("critSystem:test").display_screen()
+    def close_test_screen(self):
+        self.looping = False
 
 
 def init_mod(game):
@@ -48,6 +55,7 @@ def init_mod(game):
     test_screen = game.screen_manager.add_screen("critSystem:test")
     test_screen.set_title("Test Screen")
     test_screen.add_option("Print", lambda: print("Test Screen"))
+    test_screen.add_option("Exit", lambda: crit_system.close_test_screen())
     test_screen.set_prompt("Sup")
-    game.screen_manager.get_screen_by_identifier("base:mainMenu").add_option("Test Screen", lambda: game.screen_manager.get_screen_by_identifier("critSystem:test").display_screen())
+    game.screen_manager.get_screen_by_identifier("base:mainMenu").add_option("Test Screen", lambda: crit_system.show_test_screen(game))
     print("Critical Hit System mod initialized!")

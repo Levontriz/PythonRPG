@@ -26,12 +26,15 @@ class Game:
         
     def initialize(self):
         """Initialize game systems and load mods."""
-        define_screens(self)
         print("Initializing game systems...")
+        # Define all built-in screens
+        define_screens(self)
         # Discover and load all mods
         self.mod_loader.discover_mods()
         # Initialize mods with game instance
         self.mod_loader.initialize_mods(self)
+        # If available load character file
+        self.save_system.load_all(self)
         print("Game initialization complete!")
 
     @staticmethod
@@ -46,12 +49,9 @@ class Game:
         """Main game loop."""
         self.initialize()
 
-        #self.save_system.save_all(self)
-        self.save_system.load_all(self)
-
+        # self.save_system.save_all(self)
         while True:
             self.screen_manager.get_screen_by_identifier("base:mainMenu").display_screen()
-        # print("Welcome to the Modular RPG Game!")
 
         
 if __name__ == "__main__":
