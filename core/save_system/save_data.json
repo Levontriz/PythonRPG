@@ -1,0 +1,10 @@
+{
+    "stats": {
+        "health": 100,
+        "strength": 10,
+        "defense": 10,
+        "crit_chance": 0,
+        "crit_multiplier": 2.0
+    },
+    "inventory": {
+        "main_hand": 
