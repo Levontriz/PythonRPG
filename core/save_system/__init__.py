@@ -54,8 +54,11 @@ class Save:
             game.character_system.name = save_data['name']
             
             print("Game loaded successfully!")
-            
+
         except Exception as e:
-            print(f"Error loading game: {e}")
-            # In case of error, initialize with default values
-            game.character_system.initialize_base_stats()
+            if type(e) == FileNotFoundError:
+                print("No save file found")
+                print("Saving default load state")
+                self.save_all(game)
+            else:
+                print(f"Error loading game: {e}, I know what you did >:]")

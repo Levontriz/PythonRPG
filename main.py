@@ -35,16 +35,9 @@ class Game:
         self.mod_loader.initialize_mods(self)
         # If available load character file
         self.save_system.load_all(self)
+        game.screen_manager.get_screen_by_identifier("base:mainMenu").add_option("Exit", lambda: print("Exiting..."))
         print("Game initialization complete!")
 
-    @staticmethod
-    def loop_false():
-        global loop
-        loop = False
-
-    def attack_simulator(self):
-        while loop:
-            self.screen_manager.get_screen_by_identifier("base:attackSimulator").display_screen()
     def run(self):
         """Main game loop."""
         self.initialize()
