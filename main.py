@@ -35,7 +35,8 @@ class Game:
         self.mod_loader.initialize_mods(self)
         # If available load character file
         self.save_system.load_all(self)
-        game.screen_manager.get_screen_by_identifier("base:mainMenu").add_option("Exit", lambda: print("Exiting..."))
+        main_menu: Screen = game.screen_manager.get_screen_by_identifier("base:mainMenu")
+        main_menu.add_option("Exit", lambda: main_menu.close())
         print("Game initialization complete!")
 
     def run(self):
@@ -43,8 +44,7 @@ class Game:
         self.initialize()
 
         # self.save_system.save_all(self)
-        while True:
-            self.screen_manager.get_screen_by_identifier("base:mainMenu").display_screen()
+        self.screen_manager.get_screen_by_identifier("base:mainMenu").display_screen()
 
         
 if __name__ == "__main__":

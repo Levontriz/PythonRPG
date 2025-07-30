@@ -42,8 +42,7 @@ def _simple_number_request(title, prompt_message, prompt_cursor, options, lower_
             print('Invalid option!')
             _waitcls(2, speed_mode)
             continue
-        if type(request_int) == int:
-            return request_int - 1
+        return request_int - 1
 
 
 class ScreenTypes(Enum):
@@ -65,7 +64,7 @@ class Option:
 
 class Screen:
     def __init__(self, identifier: str, title: str = None, screen_type: ScreenTypes = ScreenTypes.OPTIONS,
-                 options: list[Option] = None, prompt: str = None, prompt_cursor: str = "> ", speed_mode: bool = False):
+                 options: list[Option] = None, prompt: str = None, prompt_cursor: str = "> ", looping: bool = True, speed_mode: bool = False):
         import re
         pattern = re.compile(r"^[a-zA-Z0-9]+:[a-zA-Z0-9]+$")
         valid_identifier = True if pattern.match(identifier) is not None else False
@@ -82,6 +81,7 @@ class Screen:
         self.options = options if options is not None else []  # Create new list for each instance
         self.prompt = prompt
         self.promptCursor = prompt_cursor
+        self.looping = looping
         self.speedMode = speed_mode
 
     @property
@@ -130,15 +130,23 @@ class Screen:
         self.promptCursor = prompt_cursor
         return self
 
+    def close(self):
+        self.looping = False
+        return self
+
     def display_screen(self):
-        try:
-            choice = _simple_number_request(self.title, self.prompt, self.promptCursor, self.options, 1, len(self.options),
-                                            self.speedMode)
-            if 0 <= choice < len(self.options):
-                option = self.options[choice]
-                option.execute()  # If using callback system
-        except (IndexError, ValueError) as e:
-            print(f"Invalid choice: {e}")
+        while True:
+            try:
+                choice = _simple_number_request(self.title, self.prompt, self.promptCursor, self.options, 1, len(self.options),
+                                                self.speedMode)
+                if 0 <= choice < len(self.options):
+                    option = self.options[choice]
+                    option.execute()  # If using callback system
+            except (IndexError, ValueError) as e:
+                print(f"Invalid choice: {e}")
+            if not self.looping:
+                break
+
 
 
 class ScreenManager:
