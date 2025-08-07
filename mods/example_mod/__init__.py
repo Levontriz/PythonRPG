@@ -2,7 +2,7 @@
 Example mod that adds a critical hit system to the game.
 This demonstrates how to create a mod that interfaces with multiple core systems.
 """
-from core.items import Item, Weapon
+from core.items import Item
 from mods.default_mod import Mod
 
 class CriticalHitSystem(Mod):
@@ -11,7 +11,7 @@ class CriticalHitSystem(Mod):
         self.default_crit_chance = 0  # 15% chance for critical hit
         self.default_crit_multiplier = 2.0  # Double damage on crit
         self.new_item = Item("Test Item", "CriticalHitSystem:TestItem", "Test item for critical hit system!", False, None)
-        self.new_weapon = Weapon("Crit Sword", "CriticalHitSystem:CritSword", "This sword has increased crit chance!", False, None, 10, {"crit_chance_increase": 1, "crit_multiplier_increase": 0})
+        self.new_weapon = Item("Crit Sword", "CriticalHitSystem:CritSword", "This sword has increased crit chance!", False, None, {"damage": 10, "crit_chance_increase": 1, "crit_multiplier_increase": 0})
     def name(self):
         return self.name
 

@@ -46,17 +46,3 @@ class Item:
         else:
             print(f"Variable '{var_name}' doesn't exist")
         return self
-
-
-class Weapon(Item):
-    def __init__(self, display_name="Example Item", item_id="example:id", description="", craftable=False, recipe=None,
-                 base_damage=1, modifications=None):
-        if modifications is None:
-            modifications = {}
-        super().__init__(display_name, item_id, description, craftable, recipe, modifications)
-
-        self.base_damage = base_damage
-
-    def register_modifier(self, namespace, modifier_to_add, value):
-        self.modifications[namespace][modifier_to_add] = value
-        return self
