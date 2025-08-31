@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional, Callable
 
-def _waitcls(sleep_time, speed_mode):
+def _wait_cls(sleep_time, speed_mode):
     import os
     import time
     version = os.name
@@ -33,14 +33,14 @@ def _simple_number_request(title, prompt_message, prompt_cursor, options, lower_
         try:
             request_int = int(request)
         except ValueError:
-            _waitcls(0, False)
+            _wait_cls(0, False)
             print('Non integer value entered!')
-            _waitcls(2, speed_mode)
+            _wait_cls(2, speed_mode)
             continue
         if request_int < lower_limit or request_int > upper_limit:
-            _waitcls(0, False)
+            _wait_cls(0, False)
             print('Invalid option!')
-            _waitcls(2, speed_mode)
+            _wait_cls(2, speed_mode)
             continue
         return request_int - 1
 
